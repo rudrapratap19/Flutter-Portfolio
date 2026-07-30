@@ -187,10 +187,10 @@ class _ProjectCardState extends State<_ProjectCard> {
   Widget build(BuildContext context) {
     final p = widget.project;
 
-    return ValueListenableBuilder<ThemeMode>(
+    return ValueListenableBuilder<AppThemeMode>(
       valueListenable: ThemeNotifier.instance,
       builder: (context, mode, child) {
-        final isDark = mode == ThemeMode.dark;
+        final isDark = mode != AppThemeMode.light;
 
         return MouseRegion(
           onEnter: (_) => setState(() => _isHovered = true),

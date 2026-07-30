@@ -266,10 +266,10 @@ class _ContactCardState extends State<_ContactCard> {
   Widget build(BuildContext context) {
     final c = widget.card;
 
-    return ValueListenableBuilder<ThemeMode>(
+    return ValueListenableBuilder<AppThemeMode>(
       valueListenable: ThemeNotifier.instance,
       builder: (context, mode, child) {
-        final isDark = mode == ThemeMode.dark;
+        final isDark = mode != AppThemeMode.light;
 
         return MouseRegion(
           onEnter: (_) => setState(() => _isHovered = true),
@@ -468,10 +468,10 @@ class _ContactFormState extends State<_ContactForm> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder<ThemeMode>(
+    return ValueListenableBuilder<AppThemeMode>(
       valueListenable: ThemeNotifier.instance,
       builder: (context, mode, child) {
-        final isDark = mode == ThemeMode.dark;
+        final isDark = mode != AppThemeMode.light;
 
         return Container(
           constraints: const BoxConstraints(maxWidth: 600),
