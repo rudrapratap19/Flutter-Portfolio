@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <base href="$FLUTTER_BASE_HREF">
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Rudra Pratap Singh — Flutter Developer and AI/DS Student at IIIT Raichur. Portfolio showcasing projects, skills, experience and live coding stats.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Rudra Pratap Singh | Flutter Dev and AI Student">
+  <meta property="og:description" content="Portfolio of Rudra Pratap Singh — Junior Flutter Developer, AI and Data Science student at IIIT Raichur. Building production-ready apps and ML systems.">
+  <meta property="og:image" content="icons/Icon-512.png">
+  <meta property="og:url" content="https://rudrapratap.dev">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rudra Pratap Singh | Flutter Dev and AI Student">
+  <meta name="twitter:description" content="Flutter developer and AI student building production-ready apps, backend systems, and ML models.">
+  <meta name="twitter:image" content="icons/Icon-512.png">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Rudra Portfolio">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" href="favicon.png"/>
+  <title>Rudra Pratap Singh | Portfolio</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Grotesk:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #0A0E14; }
+    #splash-screen {
+      position: fixed; inset: 0; background: #0A0E14;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 9999; font-family: 'Share Tech Mono', monospace;
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    #splash-screen.hide { opacity: 0; transform: scale(1.03); pointer-events: none; }
+    .splash-terminal-window {
+      width: min(560px, 90vw); background: #0C1017;
+      border-radius: 10px; border: 1px solid #1E293B;
+      box-shadow: 0 0 60px rgba(0,255,102,0.06), 0 20px 60px rgba(0,0,0,0.8); overflow: hidden;
+    }
+    .splash-titlebar {
+      background: #161B22; padding: 10px 16px;
+      display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #1E293B;
+    }
+    .splash-dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red   { background: #EF4444; }
+    .dot-yellow{ background: #F59E0B; }
+    .dot-green { background: #22C55E; }
+    .splash-titlebar-text { margin-left: 8px; color: #64748B; font-size: 12px; letter-spacing: 1px; }
+    .splash-body { padding: 24px 20px 20px; }
+    .splash-line { color: #E2E8F0; font-size: 13px; line-height: 1.9; min-height: 24px; }
+    .splash-line.green  { color: #00FF66; }
+    .splash-line.cyan   { color: #38BDF8; }
+    .splash-line.muted  { color: #475569; }
+    .cursor {
+      display: inline-block; width: 8px; height: 14px; background: #00FF66;
+      margin-left: 2px; vertical-align: middle; animation: blink 0.8s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+    .splash-name {
+      font-family: 'Space Grotesk', sans-serif; font-weight: 800;
+      font-size: clamp(22px, 5vw, 36px); letter-spacing: -1px;
+      background: linear-gradient(135deg, #A78BFA, #38BDF8, #00FF66);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; opacity: 0; transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      margin: 16px 0 8px; text-align: center;
+    }
+    .splash-name.visible { opacity: 1; transform: translateY(0); }
+    .splash-role {
+      color: #475569; font-size: 12px; text-align: center;
+      letter-spacing: 2px; text-transform: uppercase;
+      opacity: 0; transition: opacity 0.5s ease 0.2s;
+    }
+    .splash-role.visible { opacity: 1; }
+    .splash-progress-wrap { margin-top: 20px; background: #1E293B; border-radius: 4px; height: 3px; overflow: hidden; }
+    .splash-progress-bar {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #7C3AED, #38BDF8, #00FF66);
+      border-radius: 4px; transition: width 0.3s ease;
+      box-shadow: 0 0 8px rgba(0,255,102,0.4);
+    }
+    .splash-status { color: #475569; font-size: 11px; margin-top: 8px; text-align: right; transition: color 0.3s ease; }
+  </style>
+</head>
+<body>
+  <div id="splash-screen">
+    <div class="splash-terminal-window">
+      <div class="splash-titlebar">
+        <span class="splash-dot dot-red"></span>
+        <span class="splash-dot dot-yellow"></span>
+        <span class="splash-dot dot-green"></span>
+        <span class="splash-titlebar-text">portfolio.exe -- Terminal</span>
+      </div>
+      <div class="splash-body">
+        <div class="splash-line muted" id="s-line-0"></div>
+        <div class="splash-line" id="s-line-1"></div>
+        <div class="splash-line green" id="s-line-2"></div>
+        <div class="splash-line cyan" id="s-line-3"></div>
+        <div class="splash-line" id="s-line-4"><span class="cursor"></span></div>
+        <div class="splash-name" id="splash-name">Rudra Pratap Singh</div>
+        <div class="splash-role" id="splash-role">Flutter Dev &middot; AI &amp; DS Student</div>
+        <div class="splash-progress-wrap">
+          <div class="splash-progress-bar" id="splash-progress"></div>
+        </div>
+        <div class="splash-status" id="splash-status">Initializing...</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var lines = [
+        { id: 's-line-0', text: 'Microsoft Windows [Version 10.0.22631.3296]', delay: 0 },
+        { id: 's-line-1', text: 'C:\\Users\\Rudra> flutter run --release --device web', delay: 300 },
+        { id: 's-line-2', text: 'OK  Building portfolio app...', delay: 700 },
+        { id: 's-line-3', text: 'OK  Loading assets and fonts...', delay: 1100 },
+        { id: 's-line-4', text: '> Launching: portfolio.exe', delay: 1500, isLast: true }
+      ];
+      var statuses = [
+        { text: 'Initializing...', progress: 10, delay: 0 },
+        { text: 'Loading Flutter engine...', progress: 35, delay: 400 },
+        { text: 'Compiling assets...', progress: 55, delay: 900 },
+        { text: 'Setting up fonts...', progress: 72, delay: 1300 },
+        { text: 'Almost ready...', progress: 90, delay: 1800 }
+      ];
+      function typeText(el, text, speed) {
+        speed = speed || 30;
+        return new Promise(function(resolve) {
+          var i = 0;
+          function next() {
+            if (i < text.length) {
+              el.textContent = (el.textContent || '') + text[i++];
+              setTimeout(next, speed);
+            } else { resolve(); }
+          }
+          next();
+        });
+      }
+      async function runSplash() {
+        var progressBar = document.getElementById('splash-progress');
+        var statusEl = document.getElementById('splash-status');
+        var nameEl = document.getElementById('splash-name');
+        var roleEl = document.getElementById('splash-role');
+        statuses.forEach(function(s) {
+          setTimeout(function() {
+            if (progressBar) progressBar.style.width = s.progress + '%';
+            if (statusEl) statusEl.textContent = s.text;
+          }, s.delay);
+        });
+        for (var j = 0; j < lines.length; j++) {
+          var line = lines[j];
+          await new Promise(function(r) { setTimeout(r, line.delay); });
+          var el = document.getElementById(line.id);
+          if (!el) continue;
+          if (line.isLast) {
+            el.innerHTML = '';
+            await typeText(el, line.text, 40);
+            el.innerHTML += '<span class="cursor"></span>';
+          } else {
+            await typeText(el, line.text, 25);
+          }
+        }
+        await new Promise(function(r) { setTimeout(r, 300); });
+        if (nameEl) nameEl.classList.add('visible');
+        if (roleEl) roleEl.classList.add('visible');
+      }
+      runSplash();
+      window.addEventListener('flutter-first-frame', function() {
+        var splash = document.getElementById('splash-screen');
+        if (!splash) return;
+        var pb = document.getElementById('splash-progress');
+        var st = document.getElementById('splash-status');
+        if (pb) pb.style.width = '100%';
+        if (st) { st.textContent = 'Ready!'; st.style.color = '#00FF66'; }
+        setTimeout(function() {
+          splash.classList.add('hide');
+          setTimeout(function() { splash.remove(); }, 700);
+        }, 350);
+      });
+    })();
+  </script>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>
