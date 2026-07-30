@@ -12,6 +12,19 @@ class ProjectsSection extends StatelessWidget {
 
   static final _projects = [
     _Project(
+      title: 'OAuth 2.0 & OIDC\nIdentity Provider',
+      subtitle: '🔐 Authentication Server & Dashboard',
+      tags: ['Node.js', 'Prisma', 'Redis', 'React'],
+      description:
+          'Built a robust Identity Provider supporting Authorization Code Grant, PKCE, and RS256 JWTs. '
+          'Features a high-performance Redis cache and a modern React 18 admin dashboard.',
+      githubUrl: 'https://github.com/rudrapratap19/Identity-Provider',
+      demoUrl: null,
+      color: AppColors.purple,
+      icon: Icons.security_rounded,
+      metrics: ['RS256 JWTs', 'Redis Caching', 'PKCE Auth'],
+    ),
+    _Project(
       title: 'Modern Retrieval-Augmented Discovery\nof RESTful Web APIs',
       subtitle: '📄 Research Paper – Under Review',
       tags: ['Python', 'NLP', 'LLMs', 'BM25', 'BGE Embeddings'],
