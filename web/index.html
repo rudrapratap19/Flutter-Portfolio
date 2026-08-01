@@ -179,8 +179,18 @@
       }
 
       window.addEventListener('flutter-first-frame', hideSplash);
-      // Fallback timeout in case flutter-first-frame event isn't dispatched
-      setTimeout(hideSplash, 3000);
+      window.addEventListener('load', function() {
+        var observer = new MutationObserver(function() {
+          if (document.querySelector('flutter-view') || document.querySelector('flt-glass-pane') || document.querySelector('canvas')) {
+            hideSplash();
+            observer.disconnect();
+          }
+        });
+        observer.observe(document.body || document.documentElement, { childList: true, subtree: true });
+      });
+
+      // Fallback timeout for slow debug connections
+      setTimeout(hideSplash, 6000);
     })();
   </script>
   <script src="flutter_bootstrap.js" async></script>
