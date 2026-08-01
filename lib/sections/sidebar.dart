@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../theme/app_colors.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart'; // We can use standard icons if this isn't available. Wait, let's stick to standard Material icons + cupertino to be safe.
+import '../theme/theme_notifier.dart';
 
 class Sidebar extends StatefulWidget {
   final ScrollController scrollController;
@@ -162,7 +162,7 @@ class _SidebarState extends State<Sidebar> {
             child: MouseRegion(
               cursor: SystemMouseCursors.click,
               child: GestureDetector(
-                onTap: () => launchUrl(Uri.parse('assets/Resume.pdf')),
+                onTap: () => launchUrl(Uri.parse('Resume.pdf')),
                 child: Container(
                   width: double.infinity,
                   padding: const EdgeInsets.symmetric(vertical: 8),
@@ -212,6 +212,50 @@ class _SidebarState extends State<Sidebar> {
               },
             ),
           ),
+
+          const Divider(color: Colors.white10, height: 1),
+          const SizedBox(height: 12),
+          
+          // Theme Switcher Section in Sidebar
+          ValueListenableBuilder<AppThemeMode>(
+            valueListenable: ThemeNotifier.instance,
+            builder: (context, currentMode, child) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'THEME & MODE',
+                      style: GoogleFonts.spaceGrotesk(
+                        color: AppColors.textMuted,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Container(
+                      padding: const EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withValues(alpha: 0.05),
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+                      ),
+                      child: Row(
+                        children: [
+                          _buildModeTab(AppThemeMode.light, currentMode, Icons.wb_sunny_outlined, 'Light'),
+                          _buildModeTab(AppThemeMode.dark, currentMode, Icons.dark_mode_outlined, 'Dark'),
+                          _buildModeTab(AppThemeMode.cmd, currentMode, Icons.terminal_rounded, 'CMD'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          ),
+          const SizedBox(height: 12),
 
           const Divider(color: Colors.white10, height: 1),
           const SizedBox(height: 16),
@@ -365,6 +409,68 @@ class _SocialIconState extends State<_SocialIcon> {
               color: _isHovered ? Colors.white : AppColors.textMuted,
               size: 20,
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildModeTab(
+    AppThemeMode mode,
+    AppThemeMode activeMode,
+    IconData icon,
+    String label,
+  ) {
+    final isActive = mode == activeMode;
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => ThemeNotifier.instance.setTheme(mode),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          decoration: BoxDecoration(
+            color: isActive
+                ? (mode == AppThemeMode.cmd
+                    ? const Color(0xFF00FF66).withValues(alpha: 0.2)
+                    : AppColors.violet.withValues(alpha: 0.25))
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(6),
+            border: isActive
+                ? Border.all(
+                    color: mode == AppThemeMode.cmd
+                        ? const Color(0xFF00FF66)
+                        : AppColors.violet,
+                    width: 1,
+                  )
+                : null,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 13,
+                color: isActive
+                    ? (mode == AppThemeMode.cmd
+                        ? const Color(0xFF00FF66)
+                        : AppColors.violet)
+                    : AppColors.textMuted,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                label,
+                style: GoogleFonts.inter(
+                  color: isActive
+                      ? (mode == AppThemeMode.cmd
+                          ? const Color(0xFF00FF66)
+                          : Colors.white)
+                      : AppColors.textMuted,
+                  fontSize: 11,
+                  fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+                ),
+              ),
+            ],
           ),
         ),
       ),

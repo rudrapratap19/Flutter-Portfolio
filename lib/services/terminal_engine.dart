@@ -407,7 +407,7 @@ LinkedIn: https://www.linkedin.com/in/rudra-pratap-singh-677149314
             return [
               TerminalOutputLine('Opening Resume PDF...', type: 'accent'),
               TerminalOutputLine('Downloading: Resume_Rudra_Pratap_Singh.pdf', type: 'success'),
-              TerminalOutputLine('>> OPEN_URL:assets/Resume.pdf', type: '__url__'),
+              TerminalOutputLine('>> OPEN_URL:Resume.pdf', type: '__url__'),
             ];
           case 'leetcode':
             return [

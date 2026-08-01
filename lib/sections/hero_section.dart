@@ -157,7 +157,7 @@ class HeroSection extends StatelessWidget {
                     _GradientButton(
                       label: 'Resume',
                       icon: Icons.description_rounded,
-                      onTap: () => launchUrl(Uri.parse('assets/Resume.pdf')),
+                      onTap: () => launchUrl(Uri.parse('Resume.pdf')),
                     ),
                     _OutlineButton(
                       label: 'Contact Me',

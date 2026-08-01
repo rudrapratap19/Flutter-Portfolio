@@ -18,6 +18,7 @@ import 'sections/terminal_view.dart';
 import 'sections/achievements_tree_section.dart';
 import 'widgets/cmd_prompt_dialog.dart';
 import 'widgets/ai_chatbot.dart';
+import 'widgets/theme_mode_toggle.dart';
 import 'dart:async';
 
 void main() {
@@ -241,6 +242,15 @@ class _PortfolioHomeState extends State<PortfolioHome> {
                             ),
                           ),
                           
+                         // Floating Theme & CMD Mode Switcher (Top Right)
+                          const Positioned(
+                            top: 20,
+                            right: 20,
+                            child: SafeArea(
+                              child: ThemeModeToggle(),
+                            ),
+                          ),
+
                         // AI Chatbot Floating Widget
                         const AiChatbot(),
                       ],
