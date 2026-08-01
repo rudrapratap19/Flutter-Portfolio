@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <base href="$FLUTTER_BASE_HREF">
@@ -165,18 +165,22 @@
         if (roleEl) roleEl.classList.add('visible');
       }
       runSplash();
-      window.addEventListener('flutter-first-frame', function() {
+      function hideSplash() {
         var splash = document.getElementById('splash-screen');
-        if (!splash) return;
+        if (!splash || splash.classList.contains('hide')) return;
         var pb = document.getElementById('splash-progress');
         var st = document.getElementById('splash-status');
         if (pb) pb.style.width = '100%';
         if (st) { st.textContent = 'Ready!'; st.style.color = '#00FF66'; }
         setTimeout(function() {
           splash.classList.add('hide');
-          setTimeout(function() { splash.remove(); }, 700);
+          setTimeout(function() { if (splash.parentNode) splash.remove(); }, 700);
         }, 350);
-      });
+      }
+
+      window.addEventListener('flutter-first-frame', hideSplash);
+      // Fallback timeout in case flutter-first-frame event isn't dispatched
+      setTimeout(hideSplash, 3000);
     })();
   </script>
   <script src="flutter_bootstrap.js" async></script>
