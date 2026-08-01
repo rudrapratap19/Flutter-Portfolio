@@ -176,7 +176,7 @@ class CmdPromptDialog extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    'Explore Rudra\'s portfolio using authentic terminal commands: neofetch, ping, tree, stats, matrix, and cat resume.txt!',
+                    'Explore my portfolio using authentic terminal commands: neofetch, ping, tree, stats, matrix, and cat resume.txt!',
                     style: GoogleFonts.inter(
                       color: const Color(0xFFCBD5E1),
                       fontSize: 13,

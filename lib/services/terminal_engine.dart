@@ -367,7 +367,7 @@ LinkedIn: https://www.linkedin.com/in/rudra-pratap-singh-677149314
             TerminalOutputLine('  │  Msg: ${message.substring(0, message.length.clamp(0, 38)).padRight(38)} │'),
             TerminalOutputLine('  └─────────────────────────────────────────────┘', type: 'accent'),
             TerminalOutputLine(''),
-            TerminalOutputLine("Rudra will respond soon! 🚀", type: 'success'),
+            TerminalOutputLine("I'll get back to you soon! 🚀", type: 'success'),
           ];
         }
         return [

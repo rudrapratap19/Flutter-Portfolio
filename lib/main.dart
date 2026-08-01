@@ -20,9 +20,16 @@ import 'widgets/cmd_prompt_dialog.dart';
 import 'widgets/ai_chatbot.dart';
 import 'widgets/theme_mode_toggle.dart';
 import 'dart:async';
+import 'dart:html' as html;
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const PortfolioApp());
+  WidgetsBinding.instance.addPostFrameCallback((_) {
+    try {
+      html.window.dispatchEvent(html.Event('flutter-first-frame'));
+    } catch (_) {}
+  });
 }
 
 class PortfolioApp extends StatelessWidget {
@@ -65,6 +72,12 @@ class _PortfolioHomeState extends State<PortfolioHome> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      try {
+        html.window.dispatchEvent(html.Event('flutter-first-frame'));
+      } catch (_) {}
+    });
 
     // Relevant timing fallback: 8 seconds after launch
     _cmdTimer = Timer(const Duration(seconds: 8), () {

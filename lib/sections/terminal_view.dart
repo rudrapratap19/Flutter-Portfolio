@@ -5,6 +5,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../services/terminal_engine.dart';
 import '../theme/theme_notifier.dart';
 import '../widgets/matrix_rain.dart';
+import 'dart:html' as html;
 
 class TerminalView extends StatefulWidget {
   const TerminalView({super.key});
@@ -36,6 +37,9 @@ class _TerminalViewState extends State<TerminalView> {
     // Auto-focus input
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _focusNode.requestFocus();
+      try {
+        html.window.dispatchEvent(html.Event('flutter-first-frame'));
+      } catch (_) {}
     });
   }
 

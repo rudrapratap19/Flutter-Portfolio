@@ -86,7 +86,7 @@ Guidelines for your responses:
     // Add initial greeting
     _messages.add(ChatMessage(
       id: 0,
-      text: "Hi there! 👋 I'm Rudra's AI Assistant. Would you like to know more about his projects, skills, or experience? Feel free to ask me anything!",
+      text: "Hi there! 👋 I'm Rudra's AI Assistant. Want to know more about my projects, skills, or experience? Feel free to ask me anything!",
       isUser: false,
     ));
   }
