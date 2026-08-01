@@ -294,6 +294,68 @@ class _SidebarState extends State<Sidebar> {
       ),
     );
   }
+
+  Widget _buildModeTab(
+    AppThemeMode mode,
+    AppThemeMode activeMode,
+    IconData icon,
+    String label,
+  ) {
+    final isActive = mode == activeMode;
+
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => ThemeNotifier.instance.setTheme(mode),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 200),
+          padding: const EdgeInsets.symmetric(vertical: 6),
+          decoration: BoxDecoration(
+            color: isActive
+                ? (mode == AppThemeMode.cmd
+                    ? const Color(0xFF00FF66).withValues(alpha: 0.2)
+                    : AppColors.violet.withValues(alpha: 0.25))
+                : Colors.transparent,
+            borderRadius: BorderRadius.circular(6),
+            border: isActive
+                ? Border.all(
+                    color: mode == AppThemeMode.cmd
+                        ? const Color(0xFF00FF66)
+                        : AppColors.violet,
+                    width: 1,
+                  )
+                : null,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 13,
+                color: isActive
+                    ? (mode == AppThemeMode.cmd
+                        ? const Color(0xFF00FF66)
+                        : AppColors.violet)
+                    : AppColors.textMuted,
+              ),
+              const SizedBox(width: 4),
+              Text(
+                label,
+                style: GoogleFonts.inter(
+                  color: isActive
+                      ? (mode == AppThemeMode.cmd
+                          ? const Color(0xFF00FF66)
+                          : Colors.white)
+                      : AppColors.textMuted,
+                  fontSize: 11,
+                  fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 }
 
 class _SidebarItem extends StatefulWidget {
@@ -409,68 +471,6 @@ class _SocialIconState extends State<_SocialIcon> {
               color: _isHovered ? Colors.white : AppColors.textMuted,
               size: 20,
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildModeTab(
-    AppThemeMode mode,
-    AppThemeMode activeMode,
-    IconData icon,
-    String label,
-  ) {
-    final isActive = mode == activeMode;
-
-    return Expanded(
-      child: GestureDetector(
-        onTap: () => ThemeNotifier.instance.setTheme(mode),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          padding: const EdgeInsets.symmetric(vertical: 6),
-          decoration: BoxDecoration(
-            color: isActive
-                ? (mode == AppThemeMode.cmd
-                    ? const Color(0xFF00FF66).withValues(alpha: 0.2)
-                    : AppColors.violet.withValues(alpha: 0.25))
-                : Colors.transparent,
-            borderRadius: BorderRadius.circular(6),
-            border: isActive
-                ? Border.all(
-                    color: mode == AppThemeMode.cmd
-                        ? const Color(0xFF00FF66)
-                        : AppColors.violet,
-                    width: 1,
-                  )
-                : null,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                icon,
-                size: 13,
-                color: isActive
-                    ? (mode == AppThemeMode.cmd
-                        ? const Color(0xFF00FF66)
-                        : AppColors.violet)
-                    : AppColors.textMuted,
-              ),
-              const SizedBox(width: 4),
-              Text(
-                label,
-                style: GoogleFonts.inter(
-                  color: isActive
-                      ? (mode == AppThemeMode.cmd
-                          ? const Color(0xFF00FF66)
-                          : Colors.white)
-                      : AppColors.textMuted,
-                  fontSize: 11,
-                  fontWeight: isActive ? FontWeight.bold : FontWeight.w500,
-                ),
-              ),
-            ],
           ),
         ),
       ),
